@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вычисление arctg(x) для x > 1</title>
+    <script type="text/javascript">
+        function arctg() {
+            var i = Number(document.forms["form"].elements["i"].value);
+            var x = Number(document.forms["form"].elements["x"].value);
+            var sum = 0;
+
+            if (x > 1) {
+                var xReciprocal = 1 / x;
+                for (var n = 0; n <= i; n++) {
+                    sum = sum + ((-1) ** n * (xReciprocal ** (2 * n + 1))) / (2 * n + 1);
+                }
+                sum = Math.PI / 2 - sum;
+            } else {
+                document.getElementById("result").innerHTML = "Введите значение x больше 1.";
+                return;
+            }
+            document.getElementById("result").innerHTML = "Результат arctg(" + x + ") = " + sum;
+        }
+    </script>
+</head>
+<body>
+    <form name="form">
+        <label for="x">Введите значение x (x > 1):</label>
+        <input type="number" step="0.01" id="x" name="x" required><br><br>
+        <label for="i">Введите количество итераций для точности:</label>
+        <input type="number" id="i" name="i" value="10" required><br><br>
+        <input type="button" value="Вычислить" onclick="arctg()">
+    </form>
+    <p id="result"></p>
+</body>
+</html>
